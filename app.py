@@ -5,6 +5,10 @@ app = Flask(__name__)
 # Load the model
 # model = pickle.load(open('model.pkl','rb'))
 
+@app.route('/',methods=['GET'])
+def index():
+    return 'OK!'
+
 @app.route('/api/execute',methods=['POST'])
 def predict():
     # Get the data from the POST request.
