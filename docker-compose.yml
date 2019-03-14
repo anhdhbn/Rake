@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  app:
+    image: ${DOCKER_REGISTRY-}rake
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 5000
+    networks:
+      - reverse-proxy
+      - back
+    environment:
+      - VIRTUAL_PORT=5000
+      - VIRTUAL_HOST=rake.anhdh.com
+      - LETSENCRYPT_HOST=rake.anhdh.com
+      - LETSENCRYPT_EMAIL=anhdhbn@gmail.com
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+  back:
+    driver: bridge 
+
